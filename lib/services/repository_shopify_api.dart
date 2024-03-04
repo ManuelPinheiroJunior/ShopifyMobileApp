@@ -60,20 +60,4 @@ class MyShopifyRepository {
       throw ProductError();
     }
   }
-
-  Future<Product> getProductsWithId(int id) async {
-    try {
-      final response = await _shopifyApi.getProducts();
-      final products =
-          response.map((product) => Product.fromJson(product)).toList();
-      final product = products.where((product) => product.id == id).first;
-      return product;
-    } on HttpRequestError {
-      throw ProductRequestError();
-    } on HttpError {
-      throw ProductError();
-    } on Exception {
-      throw ProductError();
-    }
-  }
 }
